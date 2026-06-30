@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -18,12 +22,10 @@ pipeline {
         stage('Build Docker Image') {
     steps {
         sh '''
-            echo "PATH=$PATH"
-            which docker
-            which docker-credential-desktop
-            docker version
+            docker build -t college-event:v1 .
         '''
     }
+}
 }
 
         stage('Deploy Docker Container') {
