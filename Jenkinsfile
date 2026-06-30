@@ -16,10 +16,15 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            steps {
-                sh '/usr/local/bin/docker build -t college-event:v1 .'
-            }
-        }
+    steps {
+        sh '''
+            echo "PATH=$PATH"
+            which docker
+            which docker-credential-desktop
+            docker version
+        '''
+    }
+}
 
         stage('Deploy Docker Container') {
             steps {
