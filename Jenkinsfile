@@ -74,5 +74,14 @@ pipeline {
             }       
         }
 
+        stage('Send Metrics to Graphite') {
+            steps {
+                sh '''
+                TIMESTAMP=$(date +%s)
+                echo "collegeevent.build.success 1 $TIMESTAMP" | nc 127.0.0.1 2003
+            '''
+            }
+        }
+
     }
 }
