@@ -20,19 +20,26 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-    steps {
-        sh '''
-            docker build -t college-event:v1 .
-        '''
-    }
-}
-}
+            steps {
+                sh '''
+                    export PATH=/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/opt/homebrew/bin:$PATH
+                    docker version
+                    docker build -t college-event:v1 .
+                '''
+            }
+        }
 
         stage('Deploy Docker Container') {
             steps {
                 sh '''
-                /usr/local/bin/docker rm -f college-event-container || true
-                /usr/local/bin/docker run -d --name college-event-container -p 8081:80 college-event:v1
+                    export PATH=/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/opt/homebrew/bin:$PATH
+
+                    docker rm -f college-event-container || true
+
+                    docker run -d \
+                        --name college-event-container \
+                        -p 8081:80 \
+                        college-event:v1
                 '''
             }
         }
@@ -40,17 +47,24 @@ pipeline {
         stage('Deploy Kubernetes') {
             steps {
                 sh '''
-                kubectl apply -f deployment.yaml
-                kubectl apply -f service.yaml
+                    export PATH=/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/opt/homebrew/bin:$PATH
+
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
                 '''
             }
         }
 
         stage('Verify Kubernetes') {
             steps {
-                sh 'kubectl get pods'
-                sh 'kubectl get svc'
+                sh '''
+                    export PATH=/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/opt/homebrew/bin:$PATH
+
+                    kubectl get pods
+                    kubectl get svc
+                '''
             }
         }
+
     }
 }
