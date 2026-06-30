@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Register</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">TECHSYMP'26</div>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+
+        <li><a href="events.html">Events</a></li>
+
+        <li><a href="speakers.html">Speakers</a></li>
+
+        <li><a href="register.html">Register</a></li>
+
+        <li><a href="gallery.html">Gallery</a></li>
+
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section style="padding-top: 140px">
+      <h2>Registration Form</h2>
+
+      <form style="max-width: 600px; margin: auto">
+        <input
+          type="text"
+          id="name"
+          placeholder="Full Name"
+          required
+        /><br /><br />
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          required
+        /><br /><br />
+
+        <input
+          type="text"
+          id="phone"
+          placeholder="Phone Number"
+          required
+        /><br /><br />
+
+        <select
+          style="
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+          "
+        >
+          <option>Hackathon</option>
+
+          <option>Coding Contest</option>
+
+          <option>Workshop</option>
+
+          <option>Paper Presentation</option>
+        </select>
+
+        <button class="btn">Register</button>
+      </form>
+    </section>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
