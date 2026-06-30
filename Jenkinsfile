@@ -65,6 +65,14 @@ pipeline {
                 '''
             }
         }
+        stage('Send Metrics') {
+    steps {
+        sh '''
+        timestamp=$(date +%s)
+        echo "collegeevent.build.success 1 $timestamp" | nc localhost 2003
+        '''
+    }
+}
 
     }
 }
